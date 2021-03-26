@@ -1,0 +1,2 @@
+# udesk_avs_android_sdk_demo
+avs 对外提供一个sdk的集成demo
