@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UdeskSettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_50"
+            android:gravity="start|center"
+            android:text="@string/udesk_set_agent_info"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_16" />
+
+        <EditText
+            android:id="@+id/customChannel"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_custom_channel"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/agentId"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_agentId"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/agentGroupId"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_agentGroupId"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="start|center"
+            android:text="@string/udesk_set_customer_info"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_16" />
+
+        <EditText
+            android:id="@+id/nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_nickName"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_avatar"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_email"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_level"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/setting_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_50"
+            android:background="#00BCD4"
+            android:paddingStart="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingEnd="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_5"
+            android:text="@string/udesk_call"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/sp_18" />
+
+    </LinearLayout>
+</ScrollView>

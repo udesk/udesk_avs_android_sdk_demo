@@ -1,5 +1,7 @@
 # UdeskAVSSDK-Android #
 
+[sdk下载](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.0_1617090388638_9vntg.aar)
+
 ## 目录
 - [一、集成SDK](#1)
 - [二、使用SDK](#2)

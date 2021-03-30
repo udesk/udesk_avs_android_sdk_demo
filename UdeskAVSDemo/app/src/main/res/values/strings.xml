@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">UdeskAVSSDK</string>
+    <string name="udesk_set_agent_info">设置客服信息</string>
+    <string name="udesk_set_customer_info">设置客户信息</string>
+    <string name="udesk_custom_channel">customChannel</string>
+    <string name="udesk_agentId">agentId</string>
+    <string name="udesk_agentGroupId">agentGroupId</string>
+    <string name="udesk_nickName">nickName</string>
+    <string name="udesk_avatar">avatar</string>
+    <string name="udesk_email">email</string>
+    <string name="udesk_level">level</string>
+    <string name="udesk_call">呼叫</string>
+    <string name="udesk_set_up">设置</string>
+</resources>
