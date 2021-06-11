@@ -73,9 +73,9 @@
 # 混淆前后的映射
 #-printmapping mapping.txt
 
--obfuscationdictionary udesk-proguard.txt
--classobfuscationdictionary udesk-proguard.txt
--packageobfuscationdictionary udesk-proguard.txt
+#-obfuscationdictionary udesk-proguard.txt
+#-classobfuscationdictionary udesk-proguard.txt
+#-packageobfuscationdictionary udesk-proguard.txt
 
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application

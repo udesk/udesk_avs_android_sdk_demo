@@ -28,7 +28,7 @@
             android:inputType="text"
             android:paddingStart="@dimen/dp_10"
             android:paddingEnd="@dimen/dp_10"
-            android:text=""
+            android:text="0Yj4iRjzAf7CK39M"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
 
@@ -57,7 +57,35 @@
             android:inputType="text"
             android:paddingStart="@dimen/dp_10"
             android:paddingEnd="@dimen/dp_10"
-            android:text=""
+            android:text="userId"
+            android:textSize="@dimen/sp_16" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/domainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:background="#BEDFDC"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/domain"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:autofillHints=""
+            android:background="@null"
+            android:hint="domain"
+            android:inputType="text"
+            android:paddingStart="@dimen/dp_10"
+            android:paddingEnd="@dimen/dp_10"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
 

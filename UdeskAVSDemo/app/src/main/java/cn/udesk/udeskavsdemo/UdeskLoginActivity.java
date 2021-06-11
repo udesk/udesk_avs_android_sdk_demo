@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import cn.udesk.udeskavssdk.UdeskAVSSDKManager;
 import cn.udesk.udeskavssdk.callback.IUdeskCallback;
@@ -18,6 +19,8 @@ public class UdeskLoginActivity extends DemoBaseActivity implements View.OnClick
     public static final String TAG = "LoginActivity";
     private EditText appId;
     private EditText userId;
+    private EditText domain;
+    private LinearLayout domainContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +28,17 @@ public class UdeskLoginActivity extends DemoBaseActivity implements View.OnClick
         setContentView(R.layout.activity_login);
         appId = findViewById(R.id.appId);
         userId = findViewById(R.id.userId);
+        domain = findViewById(R.id.domain);
+        domainContainer = findViewById(R.id.domainContainer);
         findViewById(R.id.call).setOnClickListener(this);
         findViewById(R.id.set_up).setOnClickListener(this);
+        findViewById(R.id.set_up).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                domainContainer.setVisibility(View.VISIBLE);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -35,6 +47,13 @@ public class UdeskLoginActivity extends DemoBaseActivity implements View.OnClick
             ToastUtils.showToast(getApplicationContext(), getString(R.string.udesk_avs_complete_info));
             return;
         }
+        if (domainContainer.isShown()){
+            String baseUrl = domain.getText().toString();
+            if (!TextUtils.isEmpty(baseUrl) && baseUrl.startsWith("http")){
+                UdeskAVSSDKManager.getInstance().setBaseUrl(baseUrl+"/");
+            }
+        }
+
         if (R.id.call == v.getId()) {
             boolean ret = PermissionUtil.checkPermission(this);
             if (ret) {
@@ -52,6 +71,7 @@ public class UdeskLoginActivity extends DemoBaseActivity implements View.OnClick
     protected void call() {
         try {
             showloadingDialog(getString(R.string.udesk_avs_ready_to_call));
+            UdeskAVSSDKManager.getInstance().init(getApplicationContext(), appId.getText().toString(), userId.getText().toString());
             UdeskAVSSDKManager.getInstance().call(getApplicationContext(), appId.getText().toString(), userId.getText().toString(), new IUdeskCallback() {
                 @Override
                 public void onSuccess(boolean success) {

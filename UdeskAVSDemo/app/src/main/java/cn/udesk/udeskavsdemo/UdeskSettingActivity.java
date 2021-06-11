@@ -1,11 +1,11 @@
 package cn.udesk.udeskavsdemo;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.util.HashMap;
@@ -17,6 +17,7 @@ import cn.udesk.udeskavssdk.callback.IUdeskCallback;
 import cn.udesk.udeskavssdk.callback.IUdeskTemplateMessageCallBack;
 import cn.udesk.udeskavssdk.callback.IUdeskTemplateMessagePhoneCallBack;
 import cn.udesk.udeskavssdk.configs.UdeskConfig;
+import cn.udesk.udeskavssdk.ui.activity.UdeskVideoActivity;
 import cn.udesk.udeskavssdk.utils.PermissionUtil;
 import cn.udesk.udeskavssdk.utils.ToastUtils;
 
@@ -28,6 +29,7 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
     private String appId;
     private String userId;
     private EditText customChannel, agentId, agentGroupId, nickName, avatar, email, level;
+    private CheckBox useVoice,showLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
         Intent intent = getIntent();
         appId = intent.getStringExtra(APPID);
         userId = intent.getStringExtra(USERID);
+        UdeskAVSSDKManager.getInstance().init(getApplicationContext(), appId, userId);
         initView();
     }
 
@@ -47,8 +50,24 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
         avatar = findViewById(R.id.avatar);
         email = findViewById(R.id.email);
         level = findViewById(R.id.level);
+        useVoice = findViewById(R.id.useVoice);
+        showLogo = findViewById(R.id.showLogo);
         findViewById(R.id.setting_call).setOnClickListener(this);
+        findViewById(R.id.history_message).setOnClickListener(this);
+        testData();
     }
+
+    private void testData() {
+        customChannel.setText("hu");
+        agentId.setText("258031");
+//        agentId.setText("17");
+        agentGroupId.setText("2_4");
+        nickName.setText("customer");
+        avatar.setText("https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/Group%2016_1615542625814_p3fj4.png?x-oss-process=image/auto-orient,1/resize,h_300,w_300");
+        email.setText("123@udesk.cn");
+        level.setText("4");
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -61,6 +80,8 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
             if (ret) {
                 call();
             }
+        }else if (R.id.history_message == v.getId()){
+            UdeskAVSSDKManager.getInstance().queryChatRecord();
         }
     }
 
@@ -68,7 +89,7 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
     protected void call() {
         try {
             showloadingDialog(getString(R.string.udesk_avs_ready_to_call));
-            UdeskAVSSDKManager.getInstance().call(getApplicationContext(), appId, userId, makeBuilder().build(), new IUdeskCallback() {
+            UdeskAVSSDKManager.getInstance().call(getApplicationContext(), appId, userId,makeBuilder().build(), new IUdeskCallback() {
                 @Override
                 public void onSuccess(boolean success) {
                     hideLoadingDialog();
@@ -90,22 +111,28 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
         UdeskConfig.Builder builder = new UdeskConfig.Builder();
         builder.setAgentInfo(buildAgentInfo())
                 .setCustomerInfo(buildCustomerInfo())
+                .setUseVoice(useVoice.isChecked())
+                .setShowLogoBg(showLogo.isChecked())
+                .setLogoResId(R.drawable.udesk_logo_test)
                 .setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
                     @Override
-                    public void templateMsgLinkCallBack(Context context, String url) {
+                    public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息链接回调");
+                        activity.sendSystemMessage("点击链接成功");
                     }
                 })
                 .setTemplateMessagePhoneCallBack(new IUdeskTemplateMessagePhoneCallBack() {
                     @Override
-                    public void templateMsgPhoneCallBack(Context context, String jsonValue) {
+                    public void templateMsgPhoneCallBack(UdeskVideoActivity activity, String jsonValue) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息电话回调");
+                        activity.sendSystemMessage("点击电话成功");
                     }
                 })
                 .setTemplateMessageCallBack(new IUdeskTemplateMessageCallBack() {
                     @Override
-                    public void templateMsgCallBack(Context context, String jsonValue) {
+                    public void templateMsgCallBack(UdeskVideoActivity activity, String jsonValue) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息自定义回调");
+                        activity.sendSystemMessage("点击自定义消息成功");
                     }
                 });
         return builder;

@@ -27,10 +27,12 @@
         <activity
             android:name=".UdeskSettingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/UdeskAVSFullScreenTheme"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/UdeskAVSFullScreenTheme" />
         <activity
             android:name=".UdeskLoginActivity"
             android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/UdeskAVSFullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

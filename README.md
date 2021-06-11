@@ -1,11 +1,19 @@
 # UdeskAVSSDK-Android #
 
-[sdk下载](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.0_1617090388638_9vntg.aar)
+## 特别说明
+   **androidx 库请使用 main 分支**
+
+   **support 库 请使用support 分支**
+
+## sdk下载地址
+
+[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.41623407067234.aar)
 
 ## 目录
 - [一、集成SDK](#1)
 - [二、使用SDK](#2)
 - [三、SDK API说明](#3)
+- [四、更新日志](#4)
 
 <h2 id="1">一、集成SDK</h2>
 
@@ -14,7 +22,7 @@
 | ---------         | ------------         |
 | UdeskAVSSDK       | 视频客服sdk业务驱动包  |        
 
-增量说明：aar 本身大小约600KB，其余为依赖库的增量。
+增量说明：aar 本身大小约1M，其余为依赖库的增量。
 
 各架构so库大小：
 
@@ -25,6 +33,8 @@ armeabi-v7a：4.1M
 arm64-v8a： 4.9M
 
 其余依赖库共计约 3.5M
+
+增量大小：aar大小+so库大小+其他依赖库大小
 
 
 ### 1、将aar包放到libs下，abi只支持armeabi，armeabi-v7a和arm64-v8a
@@ -43,7 +53,7 @@ arm64-v8a： 4.9M
 	}
 	
 
-### 2、添加远程依赖，若原本已经存在则无需重复添加。glide、okhttp请使用4.x+版本,以免出现版本兼容bug。
+### 2、添加远程依赖，若原本已经存在则无需重复添加。glide 请使用4.x+版本,以免出现版本兼容bug。
 	
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
@@ -108,6 +118,9 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 |templateMessageCallBack      |setTemplateMessageCallBack      |结构化消息自定义类型回调|
 |templateMessageLinkCallBack  |setTemplateMessageLinkCallBack  |结构化消息链接类型回调|
 |templateMessagePhoneCallBack |setTemplateMessagePhoneCallBack |结构化消息phone类型回调|
+|isUseVoice                   |setUseVoice                     |是否使用语音模式|
+|isShowLogoBg                 |setShowLogoBg		           |是否在大屏界面展示logo 图片|
+|logoResId                    |setLogoResId                    |logo 图片资源id|
 
 示例
 
@@ -115,27 +128,29 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
         UdeskConfig.Builder builder = new UdeskConfig.Builder();
         builder.setAgentInfo(buildAgentInfo())
                 .setCustomerInfo(buildCustomerInfo())
+                .setUseVoice(true)
+                .setShowLogoBg(true)
+                .setLogoResId(R.drawable.udesk_avs_customer_default_bg)
                 .setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
                     @Override
-                    public void templateMsgLinkCallBack(Context context, String url) {
+                    public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息链接回调");
                     }
                 })
                 .setTemplateMessagePhoneCallBack(new IUdeskTemplateMessagePhoneCallBack() {
                     @Override
-                    public void templateMsgPhoneCallBack(Context context, String jsonValue) {
+                    public void templateMsgPhoneCallBack(UdeskVideoActivity activity, String jsonValue) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息电话回调");
                     }
                 })
                 .setTemplateMessageCallBack(new IUdeskTemplateMessageCallBack() {
                     @Override
-                    public void templateMsgCallBack(Context context, String jsonValue) {
+                    public void templateMsgCallBack(UdeskVideoActivity activity, String jsonValue) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息自定义回调");
                     }
                 });
         return builder;
     }
-
 
 
 ##### 3. 创建客户信息 
@@ -217,3 +232,45 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 #### 1、退出后，资源释放
  
 	UdeskAVSSDKManager.getInstance().clear()
+
+#### 2、发送消息api
+
+在回调中中支持发送系统提示消息（目前只支持纯文本）
+
+	udeskVideoActivity.sendSystemMessage(text);
+
+示例：
+
+	builder.setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
+                    @Override
+                    public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {
+                        activity.sendSystemMessage("点击链接成功");
+                    }
+                })
+
+#### 3、查询聊天记录
+
+方式一、使用sdk默认的
+
+	UdeskAVSSDKManager.getInstance().queryChatRecord();	
+
+方式二、提供UdeskChatRecordFragment展示聊天记录，自行集成到app中。
+
+
+<h2 id="4">四、更新日志</h2>
+
+#### 1.0.3 (support 分支)，1.0.4 (main分支)
+
+1. 支持查看历史消息记录
+2. 增加全屏模式
+3. 支持全屏展示自定义背景
+4. 修复已知问题
+
+#### 1.0.1 (support 分支)，1.0.2 (main分支)
+
+1. 支持发送系统消息
+2. 支持语音聊天功能 
+
+#### 1.0.0 
+
+1. 支持视频聊天功能
