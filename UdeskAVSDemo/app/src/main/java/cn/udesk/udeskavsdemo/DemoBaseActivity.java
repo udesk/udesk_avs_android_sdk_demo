@@ -2,7 +2,7 @@ package cn.udesk.udeskavsdemo;
 
 import android.content.pm.PackageManager;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 import cn.udesk.udeskavssdk.ui.activity.UdeskBaseActivity;
 import cn.udesk.udeskavssdk.utils.ToastUtils;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UdeskAVSSDK</string>
+    <string name="app_name">视频客服SDK</string>
     <string name="udesk_set_agent_info">设置客服信息</string>
     <string name="udesk_set_customer_info">设置客户信息</string>
     <string name="udesk_custom_channel">customChannel</string>
@@ -11,4 +11,7 @@
     <string name="udesk_level">level</string>
     <string name="udesk_call">呼叫</string>
     <string name="udesk_set_up">设置</string>
+    <string name="udesk_set_useVoice">使用语音模式</string>
+    <string name="udesk_get_history_message">查看消息记录</string>
+    <string name="udesk_show_logo">是否显示logo</string>
 </resources>

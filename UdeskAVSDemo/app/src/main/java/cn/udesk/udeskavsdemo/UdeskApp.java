@@ -1,8 +1,8 @@
 package cn.udesk.udeskavsdemo;
 
 import android.app.Application;
+import android.support.multidex.MultiDex;
 
-import androidx.multidex.MultiDex;
 
 import cn.udesk.udeskavssdk.utils.UdeskLogUtils;
 
