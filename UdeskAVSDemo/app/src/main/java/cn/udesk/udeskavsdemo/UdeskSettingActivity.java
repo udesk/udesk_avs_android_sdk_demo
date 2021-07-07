@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -114,6 +115,7 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
                 .setUseVoice(useVoice.isChecked())
                 .setShowLogoBg(showLogo.isChecked())
                 .setLogoResId(R.drawable.udesk_logo_test)
+                .setLogoScaleType(ImageView.ScaleType.FIT_START)
                 .setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
                     @Override
                     public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {

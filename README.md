@@ -7,7 +7,7 @@
 
 ## sdk下载地址
 
-[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.41623407067234.aar)
+[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.61625630423976.aar)
 
 ## 目录
 - [一、集成SDK](#1)
@@ -121,6 +121,9 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 |isUseVoice                   |setUseVoice                     |是否使用语音模式|
 |isShowLogoBg                 |setShowLogoBg		           |是否在大屏界面展示logo 图片|
 |logoResId                    |setLogoResId                    |logo 图片资源id|
+|logoScaleType                |setLogoScaleType                |logo 图片缩放类型 默认ImageView.ScaleType.FIT_START|
+|waitBgResId                  |setWaitBgResId                  |等待呼叫 图片资源id|
+|waitBgScaleType			  |setWaitBgScaleType			   |等待呼叫 图片缩放类型 默认ImageView.ScaleType.FIT_XY|
 
 示例
 
@@ -131,6 +134,9 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
                 .setUseVoice(true)
                 .setShowLogoBg(true)
                 .setLogoResId(R.drawable.udesk_avs_customer_default_bg)
+                .setLogoScaleType(ImageView.ScaleType.FIT_START)
+                .setWaitBgResId(R.drawable.udesk_logo_test)
+                .setWaitBgScaleType(ImageView.ScaleType.FIT_START)
                 .setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
                     @Override
                     public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {
@@ -151,6 +157,7 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
                 });
         return builder;
     }
+
 
 
 ##### 3. 创建客户信息 
@@ -258,6 +265,14 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 
 
 <h2 id="4">四、更新日志</h2>
+
+
+#### 1.0.5 (support 分支)，1.0.6 (main分支)
+
+1. 支持满意度评价
+2. 支持客服客户设置背景图片
+3. 支持设置全屏展示自定义背景缩放方式
+4. 支持设置呼叫等待界面图片和缩放方式 
 
 #### 1.0.3 (support 分支)，1.0.4 (main分支)
 
