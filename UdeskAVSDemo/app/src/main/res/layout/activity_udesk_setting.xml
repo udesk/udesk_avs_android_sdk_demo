@@ -141,6 +141,74 @@
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_20"
             android:text="@string/udesk_show_logo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="start|center"
+            android:text="@string/udesk_video_rotation"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_16" />
+        <RadioGroup
+            android:id="@+id/rotationGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_5">
+            <RadioButton
+                android:id="@+id/rotation_0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/udesk_video_rotation_0"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/rotation_90"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/udesk_video_rotation_90"/>
+            <RadioButton
+                android:id="@+id/rotation_180"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/udesk_video_rotation_180"/>
+            <RadioButton
+                android:id="@+id/rotation_270"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/udesk_video_rotation_270"/>
+        </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="start|center"
+            android:text="@string/udesk_video_fillmode"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_16" />
+        <RadioGroup
+            android:id="@+id/fillModeGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_5">
+            <RadioButton
+                android:id="@+id/mode_fill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/udesk_video_fillmode_fill"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/mode_fit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/udesk_video_fillmode_fit"/>
+        </RadioGroup>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
