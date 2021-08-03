@@ -14,4 +14,12 @@
     <string name="udesk_set_useVoice">使用语音模式</string>
     <string name="udesk_get_history_message">查看消息记录</string>
     <string name="udesk_show_logo">是否显示logo</string>
+    <string name="udesk_video_rotation">远程视频旋转</string>
+    <string name="udesk_video_rotation_0">不旋转</string>
+    <string name="udesk_video_rotation_90">旋转90度</string>
+    <string name="udesk_video_rotation_180">旋转180度</string>
+    <string name="udesk_video_rotation_270">旋转270度</string>
+    <string name="udesk_video_fillmode">远程视频填充</string>
+    <string name="udesk_video_fillmode_fill">填充模式</string>
+    <string name="udesk_video_fillmode_fit">适应模式</string>
 </resources>

@@ -7,7 +7,7 @@
 
 ## sdk下载地址
 
-[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.51625638630748.aar)
+[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.71627974898005.aar)
 
 ## 目录
 - [一、集成SDK](#1)
@@ -77,17 +77,12 @@ arm64-v8a： 4.9M
 	
 ### 3、权限
 
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	使用第三方腾讯sdk 需要以下敏感权限：
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-	<uses-permission android:name="android.permission.BLUETOOTH" />
 	<uses-feature android:name="android.hardware.camera" />
 	<uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -127,6 +122,10 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 |logoScaleType                |setLogoScaleType                |logo 图片缩放类型 默认ImageView.ScaleType.FIT_START|
 |waitBgResId                  |setWaitBgResId                  |等待呼叫 图片资源id|
 |waitBgScaleType			  |setWaitBgScaleType			   |等待呼叫 图片缩放类型 默认ImageView.ScaleType.FIT_XY|
+|localViewRotation            |setLocalViewRotation            |本地预览画面的顺时针旋转角度，默认 UdeskVideoRotation.UdeskVideoRotation_0|
+|localViewFillMode            |setLocalViewFillMode            |本地预览画面的填充模式，默认 UdeskVideoFillMode.UdeskVideoFillMode_Fill|
+|remoteViewRotation           |setRemoteViewRotation           |远端视频画面的逆时针旋转角度，默认 UdeskVideoRotation.UdeskVideoRotation_0|
+|remoteViewFillMode           |setRemoteViewFillMode           |远端视频画面的填充模式，默认 UdeskVideoFillMode.UdeskVideoFillMode_Fill|
 
 示例
 
@@ -140,6 +139,10 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
                 .setLogoScaleType(ImageView.ScaleType.FIT_START)
                 .setWaitBgResId(R.drawable.udesk_logo_test)
                 .setWaitBgScaleType(ImageView.ScaleType.FIT_START)
+                .setRemoteViewFillMode(UdeskVideoFillMode.UdeskVideoFillMode_Fill)
+                .setRemoteViewRotation(UdeskVideoRotation.UdeskVideoRotation_0)
+                .setLocalViewFillMode(UdeskVideoFillMode.UdeskVideoFillMode_Fill)
+                .setLocalViewRotation(UdeskVideoRotation.UdeskVideoRotation_0)
                 .setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
                     @Override
                     public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {
@@ -266,6 +269,15 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 
 
 <h2 id="4">四、更新日志</h2>
+
+#### 1.0.7 (support 分支)，1.0.8 (main分支)
+
+1. 支持最大排队人数设置
+2. 支持设置视频界面旋转
+3. 修改权限声明
+4. 修改图片消息显示样式
+5. 修复已知问题 
+
 
 #### 1.0.5 (support 分支)，1.0.6 (main分支)
 

@@ -8,16 +8,17 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import cn.udesk.udeskavssdk.UdeskAVSSDKManager;
-import cn.udesk.udeskavssdk.callback.ITemplateMessageLinkCallBack;
 import cn.udesk.udeskavssdk.callback.IUdeskCallback;
 import cn.udesk.udeskavssdk.callback.IUdeskTemplateMessageCallBack;
-import cn.udesk.udeskavssdk.callback.IUdeskTemplateMessagePhoneCallBack;
 import cn.udesk.udeskavssdk.configs.UdeskConfig;
+import cn.udesk.udeskavssdk.configs.UdeskVideoFillMode;
+import cn.udesk.udeskavssdk.configs.UdeskVideoRotation;
 import cn.udesk.udeskavssdk.ui.activity.UdeskVideoActivity;
 import cn.udesk.udeskavssdk.utils.PermissionUtil;
 import cn.udesk.udeskavssdk.utils.ToastUtils;
@@ -31,6 +32,9 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
     private String userId;
     private EditText customChannel, agentId, agentGroupId, nickName, avatar, email, level;
     private CheckBox useVoice,showLogo;
+    private RadioGroup rotationGroup,fillModeGroup;
+    private UdeskVideoRotation rotation = UdeskVideoRotation.UdeskVideoRotation_0;
+    private UdeskVideoFillMode fillMode = UdeskVideoFillMode.UdeskVideoFillMode_Fill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,26 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
         level = findViewById(R.id.level);
         useVoice = findViewById(R.id.useVoice);
         showLogo = findViewById(R.id.showLogo);
+        rotationGroup = findViewById(R.id.rotationGroup);
+        fillModeGroup = findViewById(R.id.fillModeGroup);
+        rotationGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.rotation_0) {
+                rotation = UdeskVideoRotation.UdeskVideoRotation_0;
+            } else if (checkedId == R.id.rotation_90) {
+                rotation = UdeskVideoRotation.UdeskVideoRotation_90;
+            } else if (checkedId == R.id.rotation_180) {
+                rotation = UdeskVideoRotation.UdeskVideoRotation_180;
+            } else if (checkedId == R.id.rotation_270) {
+                rotation = UdeskVideoRotation.UdeskVideoRotation_270;
+            }
+        });
+        fillModeGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.mode_fill) {
+                fillMode = UdeskVideoFillMode.UdeskVideoFillMode_Fill;
+            } else if (checkedId == R.id.mode_fit) {
+                fillMode = UdeskVideoFillMode.UdeskVideoFillMode_Fit;
+            }
+        });
         findViewById(R.id.setting_call).setOnClickListener(this);
         findViewById(R.id.history_message).setOnClickListener(this);
         testData();
@@ -116,6 +140,10 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
                 .setShowLogoBg(showLogo.isChecked())
                 .setLogoResId(R.drawable.udesk_logo_test)
                 .setLogoScaleType(ImageView.ScaleType.CENTER_INSIDE)
+                .setRemoteViewFillMode(fillMode)
+                .setRemoteViewRotation(rotation)
+                .setLocalViewFillMode(fillMode)
+                .setLocalViewRotation(rotation)
 //                .setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
 //                    @Override
 //                    public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {
