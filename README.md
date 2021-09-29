@@ -7,7 +7,7 @@
 
 ## sdk下载地址
 
-[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.71627974898005.aar)
+[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.91632905062483.aar)
 
 ## 目录
 - [一、集成SDK](#1)
@@ -269,6 +269,11 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 
 
 <h2 id="4">四、更新日志</h2>
+
+#### 1.0.9 (support 分支)，1.0.10 (main分支)
+
+1. 支持log日志上传
+2. 修复已知问题及优化
 
 #### 1.0.7 (support 分支)，1.0.8 (main分支)
 
