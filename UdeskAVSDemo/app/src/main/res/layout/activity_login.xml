@@ -53,7 +53,7 @@
             android:layout_height="@dimen/dp_50"
             android:autofillHints=""
             android:background="@null"
-            android:hint="userId"
+            android:hint="userId1"
             android:inputType="text"
             android:paddingStart="@dimen/dp_10"
             android:paddingEnd="@dimen/dp_10"
