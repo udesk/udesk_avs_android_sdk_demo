@@ -30,7 +30,7 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
 
     private String appId;
     private String userId;
-    private EditText customChannel, agentId, agentGroupId, nickName, avatar, email, level;
+    private EditText customChannel, agentId, agentGroupId, nickName, avatar, email, level, noteInfoTextKey, noteInfoTextValue, noteInfoSelectKey, noteInfoSelectValue,noteInfoContent;
     private CheckBox useVoice,showLogo;
     private RadioGroup rotationGroup,fillModeGroup;
     private UdeskVideoRotation rotation = UdeskVideoRotation.UdeskVideoRotation_0;
@@ -51,6 +51,11 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
         customChannel = findViewById(R.id.customChannel);
         agentId = findViewById(R.id.agentId);
         agentGroupId = findViewById(R.id.agentGroupId);
+        noteInfoContent = findViewById(R.id.noteInfo_content);
+        noteInfoTextKey = findViewById(R.id.noteInfo_textKey);
+        noteInfoTextValue = findViewById(R.id.noteInfo_textValue);
+        noteInfoSelectKey = findViewById(R.id.noteInfo_selectKey);
+        noteInfoSelectValue = findViewById(R.id.noteInfo_selectValue);
         nickName = findViewById(R.id.nickName);
         avatar = findViewById(R.id.avatar);
         email = findViewById(R.id.email);
@@ -84,8 +89,8 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
 
     private void testData() {
         customChannel.setText("hu");
-        agentId.setText("258031");
-//        agentId.setText("17");
+//        agentId.setText("258031");
+        agentId.setText("17");
         agentGroupId.setText("2_4");
         nickName.setText("customer");
         avatar.setText("https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/Group%2016_1615542625814_p3fj4.png?x-oss-process=image/auto-orient,1/resize,h_300,w_300");
@@ -135,6 +140,7 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
     private UdeskConfig.Builder makeBuilder() {
         UdeskConfig.Builder builder = new UdeskConfig.Builder();
         builder.setAgentInfo(buildAgentInfo())
+                .setNoteInfo(buildNoteInfo())
                 .setCustomerInfo(buildCustomerInfo())
                 .setUseVoice(useVoice.isChecked())
                 .setShowLogoBg(showLogo.isChecked())
@@ -185,6 +191,35 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
             hashMap.put("agentGroupId", agentGroupId.getText().toString());
         }
 
+        return hashMap;
+    }
+
+    /**
+     * 创建业务记录
+     * @return
+     */
+    private Map<String, Object> buildNoteInfo() {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> noteInfoMap = new HashMap<>();
+        //设置业务记录主题
+        if (!TextUtils.isEmpty(noteInfoContent.getText().toString())){
+            noteInfoMap.put("content",noteInfoContent.getText().toString());
+        }
+        HashMap<Object, Object> customMap = new HashMap<>();
+        //业务记录自定义字段TextField 管理员后台拿key
+        if (!TextUtils.isEmpty(noteInfoTextKey.getText().toString()) && !TextUtils.isEmpty(noteInfoTextValue.getText().toString())) {
+            String key = noteInfoTextKey.getText().toString();
+            String value = noteInfoTextValue.getText().toString();
+            customMap.put(key, value);
+        }
+        //业务记录自定义字段SelectField 管理员后台拿key,value 是角标字符串数组
+        if (!TextUtils.isEmpty(noteInfoSelectKey.getText().toString()) && !TextUtils.isEmpty(noteInfoSelectValue.getText().toString())) {
+            String key = noteInfoSelectKey.getText().toString();
+            String value = noteInfoSelectValue.getText().toString();
+            customMap.put(key, value);
+        }
+        noteInfoMap.put("customFields", customMap);
+        hashMap.put("noteInfo",noteInfoMap);
         return hashMap;
     }
 

@@ -7,7 +7,9 @@
 
 ## sdk下载地址
 
-[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.91632905062483.aar)
+[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.111648783734619.aar)
+
+[demo下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/udeskavs-1.0.111648784169319.apk)
 
 ## 目录
 - [一、集成SDK](#1)
@@ -126,6 +128,7 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 |localViewFillMode            |setLocalViewFillMode            |本地预览画面的填充模式，默认 UdeskVideoFillMode.UdeskVideoFillMode_Fill|
 |remoteViewRotation           |setRemoteViewRotation           |远端视频画面的逆时针旋转角度，默认 UdeskVideoRotation.UdeskVideoRotation_0|
 |remoteViewFillMode           |setRemoteViewFillMode           |远端视频画面的填充模式，默认 UdeskVideoFillMode.UdeskVideoFillMode_Fill|
+|noteInfo                     |setNoteInfo                     |设置业务记录|
 
 示例
 
@@ -133,6 +136,7 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
         UdeskConfig.Builder builder = new UdeskConfig.Builder();
         builder.setAgentInfo(buildAgentInfo())
                 .setCustomerInfo(buildCustomerInfo())
+				.setNoteInfo(buildNoteInfo())
                 .setUseVoice(true)
                 .setShowLogoBg(true)
                 .setLogoResId(R.drawable.udesk_avs_customer_default_bg)
@@ -238,6 +242,31 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
      */
     UdeskAVSSDKManager.getInstance().call(getApplicationContext(), appId, userId, makeBuilder().build(),iUdeskCallback)
 
+##### 6. 创建业务记录
+
+|字段                |功能说明         |
+| -------------     |----------      |
+|noteInfo           |自定义渠道（根据此配置路由） |
+|noteInfo.content   |业务记录主题|
+|noteInfo.customFields       |业务记录自定义字段|  
+
+    private Map<String, Object> buildNoteInfo() {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> noteInfoMap = new HashMap<>();
+        //设置业务记录主题
+        noteInfoMap.put("content",noteInfoContent.getText().toString());
+        //设置业务记录自定义字段
+        HashMap<Object, Object> customMap = new HashMap<>();
+        //业务记录自定义字段TextField 管理员后台拿key
+		customMap.put(key1, value1);
+        //业务记录自定义字段TextField 管理员后台拿key,value 是角标字符串数组
+		customMap.put(key2, value2);
+        noteInfoMap.put("customFields", customMap);
+        hashMap.put("noteInfo",noteInfoMap);
+        return hashMap;
+    }
+
+
 <h2 id="3">三、SDK API说明</h2>
 
 #### 1、退出后，资源释放
@@ -269,6 +298,15 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 
 
 <h2 id="4">四、更新日志</h2>
+
+#### 1.0.11 (support 分支)，1.0.12 (main分支)
+
+1. 支持排队提示语和背景自定义
+2. 支持业务记录传参
+3. 支持询前表单
+4. 支持摄像头朝向自定义
+5. 支持视频logo自定义
+6. 视频聊天界面优化
 
 #### 1.0.9 (support 分支)，1.0.10 (main分支)
 
