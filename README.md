@@ -246,7 +246,7 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 
 |字段                |功能说明         |
 | -------------     |----------      |
-|noteInfo           |自定义渠道（根据此配置路由） |
+|noteInfo           |业务记录对象 |
 |noteInfo.content   |业务记录主题|
 |noteInfo.customFields       |业务记录自定义字段|  
 
