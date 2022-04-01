@@ -28,7 +28,7 @@
             android:inputType="text"
             android:paddingStart="@dimen/dp_10"
             android:paddingEnd="@dimen/dp_10"
-            android:text="0Yj4iRjzAf7CK39M"
+            android:text="lWxzFMKsVJQODGaj"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
 

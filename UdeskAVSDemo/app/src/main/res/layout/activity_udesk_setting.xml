@@ -69,6 +69,78 @@
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_20"
             android:gravity="start|center"
+            android:text="@string/udesk_noteInfo_customFields"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_16" />
+        <EditText
+            android:id="@+id/noteInfo_content"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_noteInfo_content"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/noteInfo_textKey"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_noteInfo_customFields_text_key"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/noteInfo_textValue"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_set_text_value"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/noteInfo_selectKey"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_noteInfo_customFields_select_key"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+        <EditText
+            android:id="@+id/noteInfo_selectValue"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_16"
+            android:gravity="start|center"
+            android:hint="@string/udesk_set_select_value"
+            android:textColor="@color/color_333333"
+            android:textColorHint="@color/color_999999"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="start|center"
             android:text="@string/udesk_set_customer_info"
             android:textColor="#666666"
             android:textSize="@dimen/sp_16" />
