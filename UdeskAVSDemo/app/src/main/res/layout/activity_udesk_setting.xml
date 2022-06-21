@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_100"
         android:orientation="vertical">
 
         <TextView
@@ -280,7 +281,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/udesk_video_fillmode_fit"/>
         </RadioGroup>
-
+        <CheckBox
+            android:id="@+id/showZoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/udesk_show_zoom" />
+        <CheckBox
+            android:id="@+id/showScreenShare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/udesk_show_screen_share" />
         <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

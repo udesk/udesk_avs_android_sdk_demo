@@ -14,8 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.udesk.udeskavssdk.UdeskAVSSDKManager;
+import cn.udesk.udeskavssdk.callback.ITemplateMessageLinkCallBack;
 import cn.udesk.udeskavssdk.callback.IUdeskCallback;
+import cn.udesk.udeskavssdk.callback.IUdeskZoomCallBack;
+import cn.udesk.udeskavssdk.callback.IUdeskScreenShareCallBack;
 import cn.udesk.udeskavssdk.callback.IUdeskTemplateMessageCallBack;
+import cn.udesk.udeskavssdk.callback.IUdeskTemplateMessagePhoneCallBack;
 import cn.udesk.udeskavssdk.configs.UdeskConfig;
 import cn.udesk.udeskavssdk.configs.UdeskVideoFillMode;
 import cn.udesk.udeskavssdk.configs.UdeskVideoRotation;
@@ -31,7 +35,7 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
     private String appId;
     private String userId;
     private EditText customChannel, agentId, agentGroupId, nickName, avatar, email, level, noteInfoTextKey, noteInfoTextValue, noteInfoSelectKey, noteInfoSelectValue,noteInfoContent;
-    private CheckBox useVoice,showLogo;
+    private CheckBox useVoice,showLogo,showZoom,showScreenShare;
     private RadioGroup rotationGroup,fillModeGroup;
     private UdeskVideoRotation rotation = UdeskVideoRotation.UdeskVideoRotation_0;
     private UdeskVideoFillMode fillMode = UdeskVideoFillMode.UdeskVideoFillMode_Fill;
@@ -82,6 +86,8 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
                 fillMode = UdeskVideoFillMode.UdeskVideoFillMode_Fit;
             }
         });
+        showZoom = findViewById(R.id.showZoom);
+        showScreenShare = findViewById(R.id.showScreenShare);
         findViewById(R.id.setting_call).setOnClickListener(this);
         findViewById(R.id.history_message).setOnClickListener(this);
         testData();
@@ -89,8 +95,8 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
 
     private void testData() {
         customChannel.setText("hu");
-//        agentId.setText("258031");
-        agentId.setText("17");
+        agentId.setText("258031");
+//        agentId.setText("17");
         agentGroupId.setText("2_4");
         nickName.setText("customer");
         avatar.setText("https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/Group%2016_1615542625814_p3fj4.png?x-oss-process=image/auto-orient,1/resize,h_300,w_300");
@@ -150,25 +156,44 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
                 .setRemoteViewRotation(rotation)
                 .setLocalViewFillMode(fillMode)
                 .setLocalViewRotation(rotation)
-//                .setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
-//                    @Override
-//                    public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {
-//                        ToastUtils.showToast(getApplicationContext(), "这个是结构化消息链接回调");
-//                        activity.sendSystemMessage("点击链接成功");
-//                    }
-//                })
-//                .setTemplateMessagePhoneCallBack(new IUdeskTemplateMessagePhoneCallBack() {
-//                    @Override
-//                    public void templateMsgPhoneCallBack(UdeskVideoActivity activity, String jsonValue) {
-//                        ToastUtils.showToast(getApplicationContext(), "这个是结构化消息电话回调");
-//                        activity.sendSystemMessage("点击电话成功");
-//                    }
-//                })
+                .setUseScreenShare(showScreenShare.isChecked())
+                .setUseZoom(showZoom.isChecked())
+                .setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
+                    @Override
+                    public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {
+                        ToastUtils.showToast(getApplicationContext(), "这个是结构化消息链接回调");
+                        activity.sendSystemMessage("点击链接成功");
+                    }
+                })
+                .setTemplateMessagePhoneCallBack(new IUdeskTemplateMessagePhoneCallBack() {
+                    @Override
+                    public void templateMsgPhoneCallBack(UdeskVideoActivity activity, String jsonValue) {
+                        ToastUtils.showToast(getApplicationContext(), "这个是结构化消息电话回调");
+                        activity.sendSystemMessage("点击电话成功");
+                    }
+                })
                 .setTemplateMessageCallBack(new IUdeskTemplateMessageCallBack() {
                     @Override
                     public void templateMsgCallBack(UdeskVideoActivity activity, String jsonValue) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息自定义回调");
                         activity.sendSystemMessage("点击自定义消息成功");
+                    }
+                })
+                .setZoomCallBack(new IUdeskZoomCallBack() {
+                    @Override
+                    public void zoomCallBack(UdeskVideoActivity activity) {
+                        ToastUtils.showToast(getApplicationContext(), "缩放回调");
+                    }
+                })
+                .setScreenShareCallBack(new IUdeskScreenShareCallBack() {
+                    @Override
+                    public void screenShareCallBack(UdeskVideoActivity activity, boolean status) {
+                        if (status){
+                            startService(new Intent(UdeskSettingActivity.this,MediaService.class));
+                            ToastUtils.showToast(getApplicationContext(), "开启屏幕分享回调");
+                        }else {
+                            ToastUtils.showToast(getApplicationContext(), "关闭屏幕分享回调");
+                        }
                     }
                 });
         return builder;
@@ -212,7 +237,7 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
             String value = noteInfoTextValue.getText().toString();
             customMap.put(key, value);
         }
-        //业务记录自定义字段SelectField 管理员后台拿key,value 是角标字符串数组
+        //业务记录自定义字段TextField 管理员后台拿key,value 是角标字符串数组
         if (!TextUtils.isEmpty(noteInfoSelectKey.getText().toString()) && !TextUtils.isEmpty(noteInfoSelectValue.getText().toString())) {
             String key = noteInfoSelectKey.getText().toString();
             String value = noteInfoSelectValue.getText().toString();

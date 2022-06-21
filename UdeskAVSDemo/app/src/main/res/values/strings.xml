@@ -28,4 +28,6 @@
     <string name="udesk_set_text_value">key对应的value</string>
     <string name="udesk_noteInfo_customFields_select_key">管理员后台查看业务记录自定义SelectField的key</string>
     <string name="udesk_set_select_value">key对应的value,传角标值(逗号隔开)</string>
+    <string name="udesk_show_zoom">是否使用缩放</string>
+    <string name="udesk_show_screen_share">是否使用屏幕分享</string>
 </resources>
