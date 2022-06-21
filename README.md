@@ -7,15 +7,16 @@
 
 ## sdk下载地址
 
-[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.121648785521956.aar)
+[aar包下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/UdeskAVSSDK_1.0.141655810049902.aar)
 
-[demo下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/udeskavs-1.0.121648785661662.apk)
+[demo下载地址](https://pro-cs-freq.kefutoutiao.com/doc/im/tid3055/udeskavs-1.0.141655810839834.apk)
 
 ## 目录
 - [一、集成SDK](#1)
 - [二、使用SDK](#2)
 - [三、SDK API说明](#3)
 - [四、更新日志](#4)
+- [五、常见问题](#5)
 
 <h2 id="1">一、集成SDK</h2>
 
@@ -27,8 +28,6 @@
 增量说明：aar 本身大小约1M，其余为依赖库的增量。
 
 各架构so库大小：
-
-armeabi： 4.1M
 
 armeabi-v7a：4.1M
 
@@ -71,7 +70,7 @@ arm64-v8a： 4.9M
     implementation 'com.squareup.okio:okio:2.8.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    implementation 'com.tencent.liteav:LiteAVSDK_TRTC:7.3.9133'
+    implementation 'com.tencent.liteav:LiteAVSDK_TRTC:10.0.0.11953'
     implementation group: 'org.ccil.cowan.tagsoup', name: 'tagsoup', version: '1.2.1'
 	
 ### 3、权限声明
@@ -125,40 +124,64 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 |remoteViewRotation           |setRemoteViewRotation           |远端视频画面的逆时针旋转角度，默认 UdeskVideoRotation.UdeskVideoRotation_0|
 |remoteViewFillMode           |setRemoteViewFillMode           |远端视频画面的填充模式，默认 UdeskVideoFillMode.UdeskVideoFillMode_Fill|
 |noteInfo                     |setNoteInfo                     |设置业务记录|
+|useScreenShare				  |setUseScreenShare               |是否使用屏幕分享|
+|screenShareCallBack          |setScreenShareCallBack          |屏幕分享回调|
+|useZoom                      |setUseZoom                      |是否使用缩放功能|
+|zoomCallBack                 |setZoomCallBack                 |缩放按钮点击回调|
+
 
 示例
 
     private UdeskConfig.Builder makeBuilder() {
         UdeskConfig.Builder builder = new UdeskConfig.Builder();
         builder.setAgentInfo(buildAgentInfo())
+                .setNoteInfo(buildNoteInfo())
                 .setCustomerInfo(buildCustomerInfo())
-				.setNoteInfo(buildNoteInfo())
-                .setUseVoice(true)
-                .setShowLogoBg(true)
-                .setLogoResId(R.drawable.udesk_avs_customer_default_bg)
+                .setUseVoice(useVoice.isChecked())
+                .setShowLogoBg(showLogo.isChecked())
+                .setLogoResId(R.drawable.udesk_logo_test)
                 .setLogoScaleType(ImageView.ScaleType.FIT_START)
-                .setWaitBgResId(R.drawable.udesk_logo_test)
-                .setWaitBgScaleType(ImageView.ScaleType.FIT_START)
-                .setRemoteViewFillMode(UdeskVideoFillMode.UdeskVideoFillMode_Fill)
-                .setRemoteViewRotation(UdeskVideoRotation.UdeskVideoRotation_0)
-                .setLocalViewFillMode(UdeskVideoFillMode.UdeskVideoFillMode_Fill)
-                .setLocalViewRotation(UdeskVideoRotation.UdeskVideoRotation_0)
+                .setRemoteViewFillMode(fillMode)
+                .setRemoteViewRotation(rotation)
+                .setLocalViewFillMode(fillMode)
+                .setLocalViewRotation(rotation)
+                .setUseScreenShare(showScreenShare.isChecked())
+                .setUseZoom(showZoom.isChecked())
                 .setTemplateMessageLinkCallBack(new ITemplateMessageLinkCallBack() {
                     @Override
                     public void templateMsgLinkCallBack(UdeskVideoActivity activity, String url) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息链接回调");
+                        activity.sendSystemMessage("点击链接成功");
                     }
                 })
                 .setTemplateMessagePhoneCallBack(new IUdeskTemplateMessagePhoneCallBack() {
                     @Override
                     public void templateMsgPhoneCallBack(UdeskVideoActivity activity, String jsonValue) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息电话回调");
+                        activity.sendSystemMessage("点击电话成功");
                     }
                 })
                 .setTemplateMessageCallBack(new IUdeskTemplateMessageCallBack() {
                     @Override
                     public void templateMsgCallBack(UdeskVideoActivity activity, String jsonValue) {
                         ToastUtils.showToast(getApplicationContext(), "这个是结构化消息自定义回调");
+                        activity.sendSystemMessage("点击自定义消息成功");
+                    }
+                })
+                .setZoomCallBack(new IUdeskZoomCallBack() {
+                    @Override
+                    public void zoomCallBack(UdeskVideoActivity activity) {
+                        ToastUtils.showToast(getApplicationContext(), "缩放回调");
+                    }
+                })
+                .setScreenShareCallBack(new IUdeskScreenShareCallBack() {
+                    @Override
+                    public void screenShareCallBack(UdeskVideoActivity activity, boolean status) {
+                        if (status){
+                            ToastUtils.showToast(getApplicationContext(), "开启屏幕分享回调");
+                        }else {
+                            ToastUtils.showToast(getApplicationContext(), "关闭屏幕分享回调");
+                        }
                     }
                 });
         return builder;
@@ -297,6 +320,10 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 
 <h2 id="4">四、更新日志</h2>
 
+#### 1.0.13 (support 分支)，1.0.14 (main分支)
+
+1. 支持屏幕分享
+
 #### 1.0.11 (support 分支)，1.0.12 (main分支)
 
 1. 支持排队提示语和背景自定义
@@ -342,3 +369,59 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 #### 1.0.0 
 
 1. 支持视频聊天功能
+
+<h2 id="5">五、常见问题</h2>
+
+#### 1、屏幕分享在Android targetSdkVersion设置为30，屏幕分享出现崩溃解决方案
+
+在使用SDK时，将将targetSdkVersion设置为30，进行屏幕分享时会出现崩溃，这主要是因为谷歌隐私策略导致的
+
+崩溃堆栈
+	
+		Caused by: java.lang.SecurityException: Media projections require a foreground service of type ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION
+解决步骤
+
+第一步
+创建一个service ，并绑定一个Notification使其作为前台service
+	
+	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //Call Start foreground with notification
+            Intent notificationIntent = new Intent(this, MediaService.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                    notificationIntent, 0);
+
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("Starting Service")
+                    .setContentText("Starting monitoring service")
+                    .setContentIntent(pendingIntent);
+            Notification notification = notificationBuilder.build();
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
+                    NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(NOTIFICATION_CHANNEL_DESC);
+            NotificationManager notificationManager = (NotificationManager)
+                    getSystemService(Context.NOTIFICATION_SERVICE);
+
+            notificationManager.createNotificationChannel(channel);
+            startForeground(1, notification); //必须使用此方法显示通知，不能使用notificationManager.notify，否则还是会报上面的错误
+        }
+
+第二步
+在AndroidManifest.xml中配置
+
+1.加入以下权限
+
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+2.设置service的type为mediaProjection
+
+	<service
+            android:name=".MediaService"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="mediaProjection" />
+
+最后一步
+
+在录屏直播前启动service
