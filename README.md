@@ -197,15 +197,36 @@ SDK中使用到了rxjava、retrofit、gson、okhttp、glide，混淆时需要将
 |avatar      |客户头像 |
 |email       |客户邮箱 |   
 |level       |客户等级 |
+|customFields |客户自定义字段 |
 	
 示例
 
-    private Map<String, Object> buildAgentInfo() {
+    private Map<String, Object> buildCustomerInfo() {
         HashMap<String, Object> hashMap = new HashMap<>(8);
 		hashMap.put("nickName", “xxxxxx”);
 		hashMap.put("avatar", “xxxxxx”);
 		hashMap.put("email", “xxxxxx”);
 		hashMap.put("level", “xxxxxx”);
+		
+		HashMap<String, Object> customerInfoMap = new HashMap<>();
+		 /**
+	      * 文本型字段：举例 "field_name": "TextField_684", 取“field_name”对应的value值作为自定义字段key值进行赋值
+	      */
+		customerInfoMap.put("TextField_684", "xxxxxxx");
+		/**
+	      * 选择型字段：举例 "field_name": "SelectField_457",
+		  *	"options": [
+		  *		{
+		  *   	  "0": "男"
+		  * 	}, 
+		  * 	{
+		  *    	  "1": "女"
+		  *  	}
+		  *  ] , 取“field_name”对应的value值作为自定义字段key值进行赋值,取"options"中的某一项key值作为value
+	      */
+		customerInfoMap.put("SelectField_457", "1");
+		hashMap.put("customFields",customerInfoMap);
+		
         return hashMap;
     }
 
