@@ -39,6 +39,7 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
     private RadioGroup rotationGroup,fillModeGroup;
     private UdeskVideoRotation rotation = UdeskVideoRotation.UdeskVideoRotation_0;
     private UdeskVideoFillMode fillMode = UdeskVideoFillMode.UdeskVideoFillMode_Fill;
+    private EditText customerTextKey, customerTextValue, customerSelectKey, customerSelectValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,10 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
         avatar = findViewById(R.id.avatar);
         email = findViewById(R.id.email);
         level = findViewById(R.id.level);
+        customerTextKey = findViewById(R.id.customer_textKey);
+        customerTextValue = findViewById(R.id.customer_textValue);
+        customerSelectKey = findViewById(R.id.customer_selectKey);
+        customerSelectValue = findViewById(R.id.customer_selectValue);
         useVoice = findViewById(R.id.useVoice);
         showLogo = findViewById(R.id.showLogo);
         rotationGroup = findViewById(R.id.rotationGroup);
@@ -267,6 +272,20 @@ public class UdeskSettingActivity extends DemoBaseActivity implements View.OnCli
         if (!TextUtils.isEmpty(level.getText().toString())) {
             hashMap.put("level", level.getText().toString());
         }
+        HashMap<String, Object> customerInfoMap = new HashMap<>();
+        //客户字段自定义字段TextField 管理员后台拿key
+        if (!TextUtils.isEmpty(customerTextKey.getText().toString()) && !TextUtils.isEmpty(customerTextValue.getText().toString())) {
+            String key = customerTextKey.getText().toString();
+            String value = customerTextValue.getText().toString();
+            customerInfoMap.put(key, value);
+        }
+        //业务记录自定义字段TextField 管理员后台拿key,value 是角标字符串数组
+        if (!TextUtils.isEmpty(customerSelectKey.getText().toString()) && !TextUtils.isEmpty(customerSelectValue.getText().toString())) {
+            String key = customerSelectKey.getText().toString();
+            String value = customerSelectValue.getText().toString();
+            customerInfoMap.put(key, value);
+        }
+        hashMap.put("customFields",customerInfoMap);
 
         return hashMap;
     }
